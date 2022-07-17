@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const ip = require('ip');
 const bodyParser = require('body-parser')
 require('dotenv').config()
 
@@ -77,7 +78,7 @@ app.post('/api/users/:_id/exercises',(req,res)=>
 
 app.get('/api/users/:_id/logs',(req,res)=>
 {
-  var id = req.params[":_id"];
+  var id = req.params["_id"];
   var username = "";
   allUserData.map((value)=>
   {
@@ -104,5 +105,5 @@ app.get('/api/users/:_id/logs',(req,res)=>
 })
 
 const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log('Your app is listening on port ' + listener.address().port)
+  console.log(`Your app is listening on http://${ip.address()}:${listener.address().port}`)
 })
